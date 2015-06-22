@@ -25,15 +25,15 @@ class Controller
 
 	}
 
-    public function getParams($key, $default_val = null){
-        return $this->getGetParam($key, $default_val) || $this->getPostParam($key, $default_val);
+    public function _request($key, $default_val = null){
+        return isset( $_REQUEST[$key] ) ? $_REQUEST[$key] : $default_val;
     }
 
-    public function getPostParam($key, $default_val = null){
+    public function _post($key, $default_val = null){
         return isset( $_POST[$key] ) ? $_POST[$key] : $default_val;
     }
 
-    public function getGetParam($key, $default_val = null){
+    public function _get($key, $default_val = null){
         return isset( $_GET[$key] ) ? $_GET[$key] : $default_val;
     }
 

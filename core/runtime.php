@@ -177,9 +177,10 @@ class Core
 	 */
 	public static function router() {
 
-		$controller   = $_GET['controller'];
-		$action       = $_GET['action'];
+		$controller   = $_GET['controller'] ? $_GET['controller'] : DEFAULT_CONTROLLER;
+		$action       = $_GET['action'] ? $_GET['action'] : DEFAULT_ACTION;
 
+        $controller = str_replace( array('/', '\\' , '.', '*', '?'), array('','', '','',''), $controller );
 		$controller_file = APP_ROOT . DS . 'controller' . DS . $controller . '.ctl.php';
 		if (file_exists($controller_file) && is_readable($controller_file)) {
 			$controller_class_name = $controller . 'Controller';

@@ -1,9 +1,12 @@
 <?php
 
 //路径
-define('APP_ROOT', dirname(dirname(dirname(__FILE__))) . '/app/api');
+define('APP_ROOT', dirname(dirname(dirname(__FILE__))) . '/app/admin');
 
 define('PAGE_404', dirname(__FILE__) . '/404.php');
+
+define('DEFAULT_CONTROLLER', 'index');
+define('DEFAULT_ACTION', 'index');
 
 //加载框架
 require_once(dirname(dirname(dirname(__FILE__))) . '/core/runtime.php');
@@ -31,5 +34,5 @@ function staticRes($file){
     }
 }
 
-Core::addRewriteHook("rewriteHook");
+//Core::addRewriteHook("rewriteHook");
 Core::run();
