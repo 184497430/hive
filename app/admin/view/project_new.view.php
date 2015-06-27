@@ -16,7 +16,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link href="static/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="static/plugins/iCheck/flat/green.css" rel="stylesheet" type="text/css" />
+    <link href="static/plugins/iCheck/minimal/blue.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
     <link href="static/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <!-- Date Picker -->
@@ -297,7 +297,7 @@
 <script>
     //Flat red color scheme for iCheck
     $('input[type="checkbox"].flat-green').iCheck({
-        checkboxClass: 'icheckbox_flat-green'
+        checkboxClass: 'icheckbox_minimal-blue'
     });
 </script>
 </body>

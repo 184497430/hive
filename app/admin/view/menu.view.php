@@ -27,8 +27,8 @@
                 </ul>
             </li>
             <li class="header">系统管理</li>
-            <li><a href=""><i class="fa fa-circle-o text-red"></i> <span>人员管理</span></a></li>
-            <li><a href="index.php?controller=project&action=list&prjid=1"><i class="fa fa-circle-o text-yellow"></i> <span>项目管理</span></a></li>
+            <li><a href="index.php?controller=user&action=list"><i class="fa fa-circle-o text-red"></i> <span>人员管理</span></a></li>
+            <li><a href="index.php?controller=project&action=list"><i class="fa fa-circle-o text-yellow"></i> <span>项目管理</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

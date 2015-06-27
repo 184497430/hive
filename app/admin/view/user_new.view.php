@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hive - 人员管理</title>
+    <title>Hive - 新成员</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -16,7 +16,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link href="static/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="static/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+    <link href="static/plugins/iCheck/minimal/blue.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
     <link href="static/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <!-- Date Picker -->
@@ -44,7 +44,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                人员列表
+                新成员
                 <small>系统管理</small>
             </h1>
         </section>
@@ -54,73 +54,44 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title"></h3>
-                            <div class="box-tools">
-                                <div class="input-group">
-                                    <input type="text" placeholder="Search" style="width: 150px;" class="form-control input-sm pull-right" name="table_search">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                        <a href="index.php?controller=user&action=new" class="btn btn-sm btn-default">＋新成员</a>
-                                        <button class="btn btn-sm btn-default">删除</button>
+                        <!-- form start -->
+                        <form role="form">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="email">登陆账号</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        <input type="email" placeholder="Email" id="email" class="form-control">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="vs">登陆密码</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" placeholder="Password" id="c" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="realname">姓名</label>
+                                    <input type="text" placeholder="填写姓名" id="realname" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>状态</label>
+                                    <div class="input-group">
+                                        <label><input type="radio" name="status" class="minimal" checked/> 正常  </label>
+                                        <label><input type="radio" name="status" class="minimal"/> 停用  </label>
+                                    </div>
+                                </div>
+
+                            </div><!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button class="btn btn-primary" type="submit">提交</button>
                             </div>
-                        </div><!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover">
-                                <tbody><tr>
-                                    <th>ID</th>
-                                    <th>登录名</th>
-                                    <th>姓名</th>
-                                    <th>状态</th>
-                                    <th>参与项目</th>
-                                    <th>参与单子数</th>
-                                    <th>打回数</th>
-                                    <th>回滚数</th>
-                                    <th>注册时间</th>
-                                </tr>
-                                <tr>
-                                    <td>175</td>
-                                    <td>zhangyuan@163.com</td>
-                                    <td>张园</td>
-                                    <td><span class="label label-danger">中止</span></td>
-                                    <td>项目A、项目B</td>
-                                    <td>1200</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>2014/05/07</td>
-                                </tr>
-                                </tbody></table>
-                        </div>
-                        <div class="box-footer clearfix">
-                            <ul class="pagination pagination-sm no-margin pull-right">
-                                <li><a href="#">«</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">»</a></li>
-                            </ul>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-            <div class="modal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title">Modal Default</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>One fine body…</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button data-dismiss="modal" class="btn btn-default pull-left" type="button">Close</button>
-                            <button class="btn btn-primary" type="button">Save changes</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
             </div>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
@@ -155,6 +126,8 @@
 <script src="static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
 <!-- Slimscroll -->
 <script src="static/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- iCheck 1.0.1 -->
+<script src="static/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 <!-- FastClick -->
 <script src='static/plugins/fastclick/fastclick.min.js'></script>
 <!-- AdminLTE App -->
@@ -162,5 +135,12 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="static/dist/js/demo.js" type="text/javascript"></script>
+
+<script>
+    //Flat red color scheme for iCheck
+    $('input[type="radio"].minimal').iCheck({
+        radioClass: 'icheckbox_minimal-blue'
+    });
+</script>
 </body>
 </html>
