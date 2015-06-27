@@ -44,12 +44,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                新建送测单
+                送测单
                 <small>项目A</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 项目A</a></li>
-                <li class="active">送测</li>
+                <li class="active">详情</li>
             </ol>
         </section>
 
@@ -63,7 +63,11 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="name">功能名</label>
-                                <input type="text" placeholder="填写功能名" id="name" class="form-control">
+                                <input type="text" placeholder="填写功能名" id="name" class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>状态</label>
+                                <input type="text" placeholder="填写功能名" id="name" class="form-control" value="新建" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="desc">描述</label>
@@ -96,11 +100,39 @@
                                     </tr>
                                     </tbody></table>
                             </div>
-                        </div><!-- /.box-body -->
 
-                        <div class="box-footer">
-                            <button class="btn btn-primary" type="submit">Submit</button>
-                        </div>
+                            <div class="form-group">
+                                <label>操作</label>
+                                <div>
+                                    <button type="button" class="btn btn-default btn-md" disabled>新建</button>
+                                    <button type="button" class="btn btn-info btn-md">送测</button>
+                                    <button type="button" class="btn btn-danger btn-md">关闭</button>
+                                    <button type="button" class="btn btn-danger btn-md">打回</button>
+                                    <button type="button" class="btn btn-success btn-md">通过</button>
+                                    <button type="button" class="btn btn-primary btn-md">部署</button>
+                                    <button type="button" class="btn btn-danger btn-md">回滚</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>历史记录</label>
+                                <ul class="products-list product-list-in-box">
+                                    <li class="item">
+                                        <a class="product-title" href="javascript::;">Samsung TV <span class="label label-warning pull-right">$1800</span></a>
+                                        <span class="product-description">
+                                          Samsung 32" 1080p 60Hz LED Smart HDTV.
+                                        </span>
+                                    </li><!-- /.item -->
+                                    <li class="item">
+                                            <a class="product-title" href="javascript::;">Bicycle <span class="label label-info pull-right">$700</span></a>
+                                            <span class="product-description">
+                                              26" Mongoose Dolomite Men's 7-speed, Navy Blue.
+                                            </span>
+                                    </li><!-- /.item -->
+
+                                </ul>
+                            </div>
+                        </div><!-- /.box-body -->
                     </form>
                 </div>
                 </div>

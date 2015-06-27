@@ -12,8 +12,12 @@ class ProjectController extends BaseController{
         parent::__construct();
     }
 
+    public function listAction(){
+        $this->show('project_list');
+    }
+
     public function newAction(){
 
-        $this->show('prjnew');
+        $this->show('project_new');
     }
 }

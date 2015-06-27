@@ -44,76 +44,80 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                时间轴
+                测试中的送测单
                 <small>项目A</small>
             </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 项目A</a></li>
+                <li class="active">测试中</li>
+            </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"></h3>
-                        <div class="box-tools">
-                            <div class="input-group">
-                                <input type="text" placeholder="Search" style="width: 150px;" class="form-control input-sm pull-right" name="table_search">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                    <ul class="timeline">
+                        <!-- timeline time label -->
+                        <li class="time-label">
+                  <span class="bg-red">
+                    10 Feb. 2014
+                  </span>
+                        </li>
+                        <!-- /.timeline-label -->
+                        <!-- timeline item -->
+                        <li>
+                            <i class="fa fa-envelope bg-blue"></i>
+                            <div class="timeline-item">
+                                <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                                <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                <div class="timeline-body">
+                                    <ol>
+                                        <li>app/Conf/openapi.php  <span class="label label-info">2014</span></li>
+                                        <li>app/module/openapi/user.class.php</li>
+                                        <li>app/module/openapi/user.class.php</li>
+                                        <li>app/module/openapi/user.class.php</li>
+                                    </ol>
+                                </div>
+                                <div class="timeline-footer">
+                                    <button class="btn btn-danger btn-xs">回滚</button>
                                 </div>
                             </div>
-                        </div>
-                    </div><!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody><tr>
-                                <th>ID</th>
-                                <th>功能名</th>
-                                <th>日期</th>
-                                <th>进度</th>
-                                <th>相关人员</th>
-                            </tr>
-                            <tr>
-                                <td>183</td>
-                                <td><a href="index.php?controller=feature&action=detail&id=1">实名认证更新</a></td>
-                                <td>2014/02/01</td>
-                                <td><span class="label label-default">新建</span><span class="label label-success">部署</span></td>
-                                <td>zhangy</td>
-                            </tr>
-                            <tr>
-                                <td>219</td>
-                                <td>Alexander Pierce</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-warning">打回</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>657</td>
-                                <td>Bob Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-primary">送测</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>175</td>
-                                <td>Mike Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-danger">中止</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            </tbody></table>
-                    </div>
-                    <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-                    </div>
-                </div>
+                        </li>
+                        <!-- END timeline item -->
+                        <!-- timeline time label -->
+                        <li class="time-label">
+                  <span class="bg-green">
+                    3 Jan. 2014
+                  </span>
+                        </li>
+                        <!-- timeline item -->
+                        <li>
+                            <i class="fa fa-cloud-upload bg-aqua"></i>
+                            <div class="timeline-item">
+                                <span class="time"><i class="fa fa-clock-o"></i> 5 days ago</span>
+                                <h3 class="timeline-header"><a href="#">Mr. Doe</a> 发布“导航条优化”功能</h3>
+                                <div class="timeline-body">
+                                    <b>描述：</b>
+                                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</p>
+                                    <b>文件：</b>
+                                    <ol>
+                                        <li>app/Conf/openapi.php  <span class="label label-info">2014</span></li>
+                                        <li>app/module/openapi/user.class.php</li>
+                                        <li>app/module/openapi/user.class.php</li>
+                                        <li>app/module/openapi/user.class.php</li>
+                                    </ol>
+                                </div>
+                                <div class="timeline-footer">
+                                    <button class="btn btn-default btn-xs">回滚</button>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END timeline item -->
+                        <li>
+                            <i class="fa fa-clock-o bg-gray"></i>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section><!-- /.content -->

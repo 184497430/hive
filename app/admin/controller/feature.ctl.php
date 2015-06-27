@@ -24,4 +24,12 @@ class FeatureController extends BaseController{
     public function historyAction(){
         $this->show('feature_history');
     }
+
+    public function detailAction(){
+        $this->show('feature_detail');
+    }
+
+    public function timelineAction(){
+        $this->show('feature_timeline');
+    }
 }

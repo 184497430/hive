@@ -16,4 +16,9 @@ class IndexController extends BaseController{
 
         $this->show('main');
     }
+
+    public function loginAction(){
+        $this->show('login');
+    }
+
 }

@@ -44,8 +44,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                时间轴
-                <small>项目A</small>
+                项目列表
+                <small>系统管理</small>
             </h1>
         </section>
 
@@ -57,50 +57,30 @@
                     <div class="box-header with-border">
                         <h3 class="box-title"></h3>
                         <div class="box-tools">
-                            <div class="input-group">
-                                <input type="text" placeholder="Search" style="width: 150px;" class="form-control input-sm pull-right" name="table_search">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
+                            <a href="index.php?controller=project&action=new" class="btn btn-default btn-sm">＋新项目</a>
                         </div>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tbody><tr>
                                 <th>ID</th>
-                                <th>功能名</th>
-                                <th>日期</th>
-                                <th>进度</th>
+                                <th>项目名</th>
+                                <th>访问URL</th>
+                                <th>描述</th>
+                                <th>部署次数</th>
                                 <th>相关人员</th>
+                                <th>成立时间</th>
+                                <th>状态</th>
                             </tr>
                             <tr>
                                 <td>183</td>
-                                <td><a href="index.php?controller=feature&action=detail&id=1">实名认证更新</a></td>
-                                <td>2014/02/01</td>
-                                <td><span class="label label-default">新建</span><span class="label label-success">部署</span></td>
+                                <td><a href="index.php?controller=project&action=new&id=1">项目A</a></td>
+                                <td><a href="" target="_blank">http://www.baidu.com</a></td>
+                                <td>描述</td>
+                                <td>20</td>
                                 <td>zhangy</td>
-                            </tr>
-                            <tr>
-                                <td>219</td>
-                                <td>Alexander Pierce</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-warning">打回</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>657</td>
-                                <td>Bob Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-primary">送测</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>175</td>
-                                <td>Mike Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-danger">中止</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                <td>2014/02/01</td>
+                                <td><span class="label label-success">正常</span></td>
                             </tr>
                             </tbody></table>
                     </div>

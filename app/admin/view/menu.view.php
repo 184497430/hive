@@ -20,15 +20,15 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="index.php?controller=feature&action=new&prjid=1"><i class="fa fa-circle-o"></i> 发布</a></li>
-                    <li><a href="index.php?controller=feature&action=work&prjid=1"><i class="fa fa-circle-o"></i> 处理中</a></li>
-                    <li><a href="index.php?controller=feature&action=history&prjid=1"><i class="fa fa-circle-o"></i> 已发布</a></li>
-                    <li><a href="index.php?controller=feature&action=time&prjid=1"><i class="fa fa-circle-o"></i> 时间轴</a></li>
+                    <li class="active"><a href="index.php?controller=feature&action=new&prjid=1"><i class="fa fa-circle-o"></i> 送测</a></li>
+                    <li><a href="index.php?controller=feature&action=work&prjid=1"><i class="fa fa-circle-o"></i> 测试中</a></li>
+                    <li><a href="index.php?controller=feature&action=history&prjid=1"><i class="fa fa-circle-o"></i> 已部署</a></li>
+                    <li><a href="index.php?controller=feature&action=timeline&prjid=1"><i class="fa fa-circle-o"></i> 时间轴</a></li>
                 </ul>
             </li>
             <li class="header">系统管理</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>权限控制</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>项目管理</span></a></li>
+            <li><a href=""><i class="fa fa-circle-o text-red"></i> <span>人员管理</span></a></li>
+            <li><a href="index.php?controller=project&action=list&prjid=1"><i class="fa fa-circle-o text-yellow"></i> <span>项目管理</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->
