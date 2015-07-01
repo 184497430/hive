@@ -12,20 +12,7 @@
 return array(
     'debug'                          => FALSE,
     //数据库配置
-    'db'                             => array(
-        'dada' => array(
-            'dbtype' => 'mysql',
-            'dbuser' => 'root',
-            'dbpswd' => '',
-            'dbname' => 'dada',
-            'dbhost' => '127.0.0.1',
-            'dbport' => '3306'
-        )
-    ),
-
-    'redis'                          => array(
-
-    ),
+    'sqlite'                         => dirname(dirname(__FILE__)) . "/data/hive.db",
 
     'static'    => 'http://' . $_SERVER['HTTP_HOST'] . "/static",
 );

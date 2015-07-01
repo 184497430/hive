@@ -1,52 +1,38 @@
 <?php
 
 
-class Mysql extends PDO{
+class SQLite extends PDO{
 
     public $last_sql;
 
-    public static function getInstance($db){
+    public static function getInstance(){
         static $instances = array();
 
-        if( array_key_exists($db, $instances) ){
-            return $instances[ $db ];
+        if( array_key_exists('sqlite', $instances) ){
+            return $instances[ 'sqlite' ];
         }
 
-        $db_configs = Core::getConfig('db');
+        $db_file = Core::getConfig('sqlite');
 
-        if( !isset($db_configs[$db]) || empty($db_configs[$db])){
-            trigger_error("缺少［{$db}］数据库配置", E_USER_ERROR);
+        if( empty($db_file)){
+            trigger_error("缺少［sqlite］数据库配置", E_USER_ERROR);
         }
 
-        $config = $db_configs[$db];
-
-        if (!isset($config['dbcoding'])) {
-            $config['dbcoding'] = "UTF8";
-        }
-
-        $mysql = new Mysql($config, $db);
-        $instances[$db] = $mysql;
-        return $mysql;
+        $db = new SQLite($db_file);
+        $instances['sqlite'] = $db;
+        return $db;
     }
 
 
-    function __construct($config, $db_name = '') {
+    function __construct($file) {
 
         try {
-            $dsn = 'mysql:host=' . $config['dbhost'] . ';dbname=' . $config['dbname'];
+            $dsn = 'sqlite:' . $file;
 
-            if ($config['dbport']) {
-                $dsn .= ';port=' . $config['dbport'];
-            }
+            parent::__construct($dsn);
 
-            $driver_options = array(
-                PDO::ATTR_CASE               => PDO::CASE_LOWER,
-                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES " . $config['dbcoding']
-            );
-
-            parent::__construct($dsn, $config['dbuser'], $config['dbpswd'], $driver_options);
-
-            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+            //$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             //数据库链接发生错误
 
@@ -80,11 +66,13 @@ class Mysql extends PDO{
     function query($sql, $params = array(), $driver_options = array()){
         $this->last_sql = $sql;
         $stmt = $this->prepare($sql, $driver_options);
-        foreach ($params as $k => &$val) {
-            if (is_int($val)) {
-                $stmt->bindParam(":{$k}", $val, PDO::PARAM_INT);
-            } else {
-                $stmt->bindParam(":{$k}", $val, PDO::PARAM_STR);
+        if(is_array($params)){
+            foreach ($params as $k => &$val) {
+                if (is_int($val)) {
+                    $stmt->bindParam(":{$k}", $val, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindParam(":{$k}", $val, PDO::PARAM_STR);
+                }
             }
         }
 
@@ -331,6 +319,7 @@ class Mysql extends PDO{
 
         if( is_string($where) ){
             $where_sql = $where;
+            $where = array();
         }elseif( is_array( $where ) ){
             foreach($where as $k=>$val){
                 $where_sql .= empty($where_sql)
