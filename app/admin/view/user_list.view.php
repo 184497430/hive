@@ -17,10 +17,6 @@
     <link href="static/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
     <link href="static/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-    <!-- jvectormap -->
-    <link href="static/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- Date Picker -->
-    <link href="static/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <!-- Daterange picker -->
     <link href="static/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
@@ -80,20 +76,29 @@
                                     <th>回滚数</th>
                                     <th>注册时间</th>
                                 </tr>
+                                <?php foreach($users['list'] as $each){ ?>
                                 <tr>
-                                    <td>175</td>
-                                    <td>zhangyuan@163.com</td>
-                                    <td>张园</td>
-                                    <td><span class="label label-danger">中止</span></td>
+                                    <td><?php echo $each['user_id']?></td>
+                                    <td><?php echo htmlspecialchars($each['user_name'])?></td>
+                                    <td><?php echo htmlspecialchars($each['real_name'])?></td>
+                                    <td>
+                                        <?php if($each['status']==1){ ?>
+                                        <span class="label label-danger">中止</span>
+                                        <?php } else { ?>
+                                            <span class="label label-success">正常</span>
+                                        <?php } ?>
+                                    </td>
                                     <td>项目A、项目B</td>
-                                    <td>1200</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>2014/05/07</td>
+                                    <td><?php echo $each['feature_num']?></td>
+                                    <td><?php echo $each['testback_num']?></td>
+                                    <td><?php echo $each['rollback_num']?></td>
+                                    <td><?php echo $each['ctime']?></td>
                                 </tr>
+                                <?php } ?>
                                 </tbody></table>
                         </div>
                         <div class="box-footer clearfix">
+                            <?php if($users['page']['count']>0) {?>
                             <ul class="pagination pagination-sm no-margin pull-right">
                                 <li><a href="#">«</a></li>
                                 <li><a href="#">1</a></li>
@@ -101,6 +106,7 @@
                                 <li><a href="#">3</a></li>
                                 <li><a href="#">»</a></li>
                             </ul>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

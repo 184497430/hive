@@ -141,7 +141,7 @@ class Core
 		} elseif (substr($class_name, -5) == 'redis') {
 			$file_name = substr($class_name, 0, -5) . '.redis.php';
 			require($dir_root . DS . 'model' . DS . 'redis' . DS . $file_name);
-		} elseif ($class_name == 'mysql') {
+		} elseif ($class_name == 'sqlite') {
 			require(CORE_ROOT . DS . 'db.php');
 		} elseif ($class_name == 'redisfactory') {
 			require(CORE_ROOT . DS . 'redis.php');
