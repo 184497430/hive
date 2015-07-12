@@ -90,6 +90,7 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="static/plugins/jQueryForm/jquery.form.js"></script>
 <!-- Bootstrap 3.3.2 JS -->
 <script src="static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- Bootstrap WYSIHTML5 -->
@@ -107,9 +108,16 @@
         });
 
         $("#frm_user").submit(function(){
-            $(this).ajaxSubmit({
+            $("#frm_user").ajaxSubmit({
+                dataType:"json",
+                beforeSubmit: function(){
+
+                },
                 success: function(data) {
-                    alert('提交成功！');
+                    alert(data.msg);
+                },
+                error: function (error) {
+
                 }
             });
             return false;

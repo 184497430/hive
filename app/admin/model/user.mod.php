@@ -42,12 +42,12 @@ class UserModel extends Model{
     }
 
     public function add($user_name, $password, $real_name){
-        $row = $this->db->getOne(self::TAB_USER_AUTH, '*', array('user_name'=>$user_name));
+        $row = $this->db->getOne(self::TAB_NAME_USER, '*', array('user_name'=>$user_name));
         if(!empty($row)){
             throw new Exception('用户已存在');
         }
 
-        return $this->db-insert(self::TAB_NAME_USER, array(
+        return $this->db->insert(self::TAB_NAME_USER, array(
             'user_name' => $user_name,
             'password'  => md5($password),
             'real_name' => $real_name,
@@ -59,53 +59,6 @@ class UserModel extends Model{
         $user_info = $this->getUserByMobile($mobile);
 
         return $user_info['password'] == md5($pwd);
-    }
-
-    public function getAuthorizeInfo($authcookie){
-        return $this->db->getOne(self::TAB_USER_AUTH, '*', array('authcookie'=>$authcookie));
-    }
-
-    public function getNewAuthorize($mobile, $unique_no){
-        $authInfo = $this->db->getOne(self::TAB_USER_AUTH, '*', array('mobile'=>$mobile));
-        if($authInfo){
-            $authInfo['authcookie'] = sha1($mobile . $unique_no . md5( rand(100000, 999999) ) . time());
-            $authInfo['modify_time'] = date('Y-m-d H:i:s');
-            $this->db->update(self::TAB_USER_AUTH, $authInfo, array('mobile'=>$mobile));
-        }else{
-            $authInfo['authcookie'] = sha1($mobile . $unique_no . md5( rand(100000, 999999) ) . time());
-            $authInfo['mobile'] = $mobile;
-            $authInfo['add_time'] = date('Y-m-d H:i:s');
-            $authInfo['modify_time'] = date('Y-m-d H:i:s');
-            $this->db->insert(self::TAB_USER_AUTH, $authInfo);
-        }
-
-        return $authInfo;
-    }
-
-    /**
-     * 获取用户信息
-     * @param $mobile
-     * @return array|bool
-     */
-    public function getUserByMobile($mobile){
-        return $this->db->getOne( self::TAB_NAME_USERS, '*', array('mobile'=>$mobile));
-    }
-
-    public function getUserById($user_id){
-        return $this->db->getOne( self::TAB_NAME_USERS, '*', array('user_id'=>$user_id));
-    }
-
-    /**
-     * 新增用户
-     * @param $mobile
-     * @param $pwd
-     * @param array $others
-     * @return bool
-     */
-    public function addUser($mobile, $pwd, $others = array()){
-        $others['mobile'] = $mobile;
-        $others['password'] = md5( $pwd );
-        return $this->db->insert( self::TAB_NAME_USERS, $others );
     }
 
     /**
