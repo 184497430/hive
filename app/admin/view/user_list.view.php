@@ -99,13 +99,7 @@
                         </div>
                         <div class="box-footer clearfix">
                             <?php if($users['page']['count']>1) {?>
-                            <ul class="pagination pagination-sm no-margin pull-right">
-                                <li><a href="#">«</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">»</a></li>
-                            </ul>
+                                <?php echo $page_tool ?>
                             <?php } ?>
                         </div>
                     </div>
