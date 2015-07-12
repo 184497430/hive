@@ -1,6 +1,86 @@
 <?php
 
 
+class Table {
+
+    private $db;
+    private $table_name;
+
+    public static function getInstance($table_name){
+        static $instances = array();
+
+        if( array_key_exists($table_name, $instances) ){
+            return $instances[ $table_name ];
+        }
+
+        $table = new Table($table_name);
+
+        $instances[$table_name] = $table;
+
+        return $table;
+    }
+
+    public function __construct($table_name) {
+
+        $this->db = SQLite::getInstance();
+        $this->table_name = $table_name;
+    }
+
+    public function __call($name, $args) {
+
+        try{
+            $ref_method = new ReflectionMethod(get_class($this->db), $name);
+        }catch (Exception $e){
+            trigger_error($e->getMessage(), E_USER_ERROR);
+        }
+
+        $ref_params = $ref_method->getParameters();
+
+        $new_args = array();
+        $i = 0;
+        foreach($ref_params as $ref_param){
+            if($ref_param->getName() == "tab_name") {
+                $new_args[] = $this->table_name;
+                continue;
+            }
+
+            if(array_key_exists($i, $args)){
+                $new_args[] = $args[$i];
+                $i++;
+                continue;
+            }
+        }
+
+        return $ref_method->invokeArgs($this->db, $new_args);
+    }
+
+    public function page($page, $page_size, $field='*',$where=null, $order=null, $having=null){
+
+        $count = $this->getOne("COUNT(*) as num", $where);
+
+        $page_count = ceil($count['num'] / max(1, $page_size) );
+        $page = max(1, min($page, $page_count));
+        $offset = ($page - 1) * $page_size;
+        $limit = $page_size;
+
+        $list = $this->get($field, $where, $order, $having, $offset, $limit);
+
+        return array(
+            'list' => $list,
+            'page'  => array(
+                'no'        => $page,
+                'count'     => $page_count,
+                'rec_num'   => $count['num'],
+            )
+        );
+    }
+
+    public function getDB(){
+        return $this->db;
+    }
+}
+
+
 class SQLite extends PDO{
 
     public $last_sql;

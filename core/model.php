@@ -9,8 +9,6 @@
 abstract class Model
 {
 
-    protected static function getClass(){}
-
     //单例模式
     public static function getInstance() {
         static $_instance = NULL;
@@ -22,7 +20,25 @@ abstract class Model
         return $_instance;
     }
 
-	public function __construct() {
+    public function __construct(){
 
-	}
+        $class_name = get_called_class();
+        $ref_class = new ReflectionClass($class_name);
+        if(!$ref_class->hasConstant("MODEL_NAME")){
+            trigger_error("Undefined class constant 'MODEL_NAME' in " . $class_name, E_USER_ERROR);
+        }
+
+        $this->table = Table::getInstance($class_name::MODEL_NAME);
+    }
+
+    public function table($name = null){
+        if(empty($name)) return $this->table;
+
+        return Table::getInstance($name);
+    }
+
+    public function db(){
+        return $this->table->getDB();
+    }
 }
+

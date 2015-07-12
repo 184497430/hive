@@ -49,19 +49,19 @@
                                     <label for="email">登陆账号</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                        <input type="email" placeholder="Email" id="email" class="form-control">
+                                        <input type="email" placeholder="Email" name="user_name" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="vs">登陆密码</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input type="password" placeholder="Password" id="c" class="form-control">
+                                        <input type="password" placeholder="Password" name="password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="realname">姓名</label>
-                                    <input type="text" placeholder="填写姓名" id="realname" class="form-control">
+                                    <input type="text" placeholder="填写姓名" name="real_name" class="form-control">
                                 </div>
 
                                 <div class="form-group">

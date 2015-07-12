@@ -8,13 +8,7 @@
 
 class UserModel extends Model{
 
-    const TAB_NAME_USER = "user";
-
-    private $db;
-
-    public function __construct(){
-        $this->db = SQLite::getInstance();
-    }
+    const MODEL_NAME = "user";
 
     public function listUsers($keyword="", $page=1, $pagesize=20){
 
@@ -22,32 +16,17 @@ class UserModel extends Model{
             $where = "user_name like '%{$keyword}%' or real_name like '%{$keyword}%'";
         }
 
-        $count = $this->db->getOne(self::TAB_NAME_USER, "COUNT(*) as num", $where);
+        return $this->table()->page($page, $pagesize, '*', $where);
 
-        $page_count = ceil($count['num'] / max(1, $pagesize) );
-        $page = max(1, min($page, $page_count));
-        $offset = ($page - 1) * $pagesize;
-        $limit = $pagesize;
-
-        $list = $this->db->get(self::TAB_NAME_USER, '*', $where, null, null, $offset, $limit);
-
-        return array(
-            'list' => $list,
-            'page'  => array(
-                'no'        => $page,
-                'count'     => $page_count,
-                'rec_num'   => $count['num'],
-            )
-        );
     }
 
     public function add($user_name, $password, $real_name){
-        $row = $this->db->getOne(self::TAB_NAME_USER, '*', array('user_name'=>$user_name));
+        $row = $this->table()->getOne('*', array('user_name'=>$user_name));
         if(!empty($row)){
             throw new Exception('用户已存在');
         }
 
-        return $this->db->insert(self::TAB_NAME_USER, array(
+        return $this->table()->insert(array(
             'user_name' => $user_name,
             'password'  => md5($password),
             'real_name' => $real_name,

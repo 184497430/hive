@@ -98,7 +98,7 @@
                                 </tbody></table>
                         </div>
                         <div class="box-footer clearfix">
-                            <?php if($users['page']['count']>0) {?>
+                            <?php if($users['page']['count']>1) {?>
                             <ul class="pagination pagination-sm no-margin pull-right">
                                 <li><a href="#">«</a></li>
                                 <li><a href="#">1</a></li>
