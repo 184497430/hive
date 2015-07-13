@@ -11,8 +11,11 @@ class BaseController extends Controller
 {
 
 	public function __construct() {
-
+        $mod_project = ProjectModel::getInstance();
+        $projects = $mod_project->getPrjsByUser(1);
+        $this->assign('my_projects', $projects);
 	}
+
 
     public function _post($key, $val=null){
         return isset($_POST[$key]) ? $_POST[$key] : $val;

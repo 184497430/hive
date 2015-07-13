@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hive - 新项目</title>
+    <title>Hive - 项目</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -31,7 +31,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                新建项目
+                修改项目
                 <small>系统管理</small>
             </h1>
         </section>
@@ -43,26 +43,27 @@
                     <div class="box box-primary">
                         <!-- form start -->
                         <form id="frm_project" role="form" method="POST" action="index.php?controller=project&action=dosave">
+                            <input type="hidden" id="id" name="id" value="<?php echo $prj_info['prj_id']?>">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="name">项目名</label>
-                                    <input type="text" placeholder="填写项目名" id="name" name="prj_name" class="form-control">
+                                    <input type="text" placeholder="填写项目名" id="name" name="prj_name" value="<?php echo htmlspecialchars($prj_info['prj_name'])?>" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="url">访问url</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">http://</span>
-                                        <input type="text" placeholder="填写URL" id="url" name="url" class="form-control">
+                                        <input type="text" placeholder="填写URL" id="url" name="url" value="<?php echo htmlspecialchars($prj_info['url'])?>" class="form-control">
                                     </div>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="desc">描述</label>
-                                    <textarea placeholder="填写 ..." rows="3" id="desc" name="desc" class="form-control"></textarea>
+                                    <textarea placeholder="填写 ..." rows="3" id="desc" name="desc" value="<?php echo htmlspecialchars($prj_info['desc'])?>" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="svn">svn地址</label>
-                                    <input type="text" placeholder="填写SVN地址" id="svn" name="svn_url" class="form-control">
+                                    <input type="text" placeholder="填写SVN地址" id="svn" name="svn_url" value="<?php echo htmlspecialchars($prj_info['svn_url'])?>" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="svn">svn账号</label>
@@ -70,13 +71,13 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">@</span>
-                                                <input type="text" placeholder="Username" id="svn_username" name="svn_username" class="form-control">
+                                                <input type="text" placeholder="Username" id="svn_username" name="svn_username" value="<?php echo htmlspecialchars($prj_info['svn_username'])?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                <input type="password" placeholder="Password" id="svn_pwd" name="svn_pwd" class="form-control">
+                                                <input type="password" placeholder="Password" id="svn_pwd" name="svn_pwd" value="<?php echo htmlspecialchars($prj_info['svn_pwd'])?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -90,13 +91,13 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-laptop"></i>
                                                 </div>
-                                                <input type="text" id="test_ip" name="test_ip" class="form-control" data-inputmask="'alias': 'ip'" data-mask/>
+                                                <input type="text" id="test_ip" name="test_ip" value="<?php echo htmlspecialchars($prj_info['test_server_ip'])?>" class="form-control" data-inputmask="'alias': 'ip'" data-mask/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Path</span>
-                                                <input type="text" placeholder="input root path" id="test_path" name="test_path" class="form-control">
+                                                <input type="text" placeholder="input root path" id="test_path" name="test_path" value="<?php echo htmlspecialchars($prj_info['test_server_path'])?>" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -110,13 +111,13 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-laptop"></i>
                                                 </div>
-                                                <input type="text" id="product_ip" name="product_ip" class="form-control" data-inputmask="'alias': 'ip'" data-mask/>
+                                                <input type="text" id="product_ip" name="product_ip" value="<?php echo htmlspecialchars($prj_info['product_server_ip'])?>" class="form-control" data-inputmask="'alias': 'ip'" data-mask/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Path</span>
-                                                <input type="text" placeholder="input root path" id="product_path" name="product_path" class="form-control">
+                                                <input type="text" placeholder="input root path" id="product_path" value="<?php echo htmlspecialchars($prj_info['product_server_path'])?>" name="product_path" class="form-control">
                                             </div>
                                         </div>
                                     </div>

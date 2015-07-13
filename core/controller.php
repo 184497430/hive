@@ -21,6 +21,8 @@ class Controller
 	 */
 	public $action;
 
+    public $tpl_vars = array();
+
 	public function __construct() {
 
 	}
@@ -37,6 +39,11 @@ class Controller
         return isset( $_GET[$key] ) ? $_GET[$key] : $default_val;
     }
 
+    public function assign($var, $value){
+        $this->tpl_vars[$var] = $value;
+
+    }
+
 	/**
 	 * 渲染模版
 	 * @param string $name 模版名
@@ -46,9 +53,13 @@ class Controller
 	public function show($name, array $vars = NULL) {
 
 		$file = APP_ROOT.DS.'view'.DS.strtolower($name).'.view.php';
-		if (isset($vars)) {
-			extract($vars);
+		if (!empty($vars) && is_array($vars)) {
+            $this->tpl_vars = array_merge($this->tpl_vars, $vars);
 		}
+
+        if (!empty($this->tpl_vars)) {
+            extract($this->tpl_vars);
+        }
 
 		require($file);
 	}

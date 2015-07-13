@@ -72,27 +72,31 @@
                                 <th>成立时间</th>
                                 <th>状态</th>
                             </tr>
+                            <?php foreach($projects['list'] as $each){ ?>
                             <tr>
-                                <td>183</td>
-                                <td><a href="index.php?controller=project&action=new&id=1">项目A</a></td>
-                                <td><a href="" target="_blank">http://www.baidu.com</a></td>
-                                <td>描述</td>
+                                <td><?php echo $each['prj_id']?></td>
+                                <td><a href="index.php?controller=project&action=modify&id=<?php echo $each['prj_id']?>"><?php echo htmlspecialchars($each['prj_name'])?></a></td>
+                                <td><a href="<?php echo htmlspecialchars($each['url'])?>" target="_blank"><?php echo htmlspecialchars($each['url'])?></a></td>
+                                <td><?php echo htmlspecialchars($each['desc'])?></td>
                                 <td>20</td>
-                                <td>zhangy</td>
-                                <td>2014/02/01</td>
-                                <td><span class="label label-success">正常</span></td>
+                                <td><?php echo htmlspecialchars($each['users'])?></td>
+                                <td><?php echo htmlspecialchars($each['ctime'])?></td>
+                                <td>
+                                <?php if($each['status']==1){ ?>
+                                    <span class="label label-danger">中止</span>
+                                <?php } else { ?>
+                                    <span class="label label-success">正常</span>
+                                <?php } ?>
+                                </td>
                             </tr>
+                            <?php } ?>
                             </tbody></table>
                     </div>
-                    <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-                    </div>
+                        <div class="box-footer clearfix">
+                            <?php if($projects['page']['count']>1) {?>
+                                <?php echo $page_tool ?>
+                            <?php } ?>
+                        </div>
                 </div>
                 </div>
             </div>

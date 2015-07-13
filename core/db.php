@@ -112,7 +112,7 @@ class SQLite extends PDO{
             parent::__construct($dsn);
 
             $this->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
-            //$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             //数据库链接发生错误
 

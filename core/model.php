@@ -31,6 +31,20 @@ abstract class Model
         $this->table = Table::getInstance($class_name::MODEL_NAME);
     }
 
+    public function getByPk($pk){
+        $class_name = get_called_class();
+        $ref_class = new ReflectionClass($class_name);
+        if(!$ref_class->hasConstant("PK")){
+            trigger_error("Undefined class constant 'PK' in " . $class_name, E_USER_ERROR);
+        }
+
+        $where = array(
+            $class_name::PK => $pk
+        );
+
+        return $this->table->getOne('*', $where);
+    }
+
     public function table($name = null){
         if(empty($name)) return $this->table;
 
