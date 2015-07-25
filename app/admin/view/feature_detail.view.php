@@ -16,22 +16,12 @@
          folder instead of downloading all of them to reduce the load. -->
     <link href="static/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="static/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-    <!-- jvectormap -->
-    <link href="static/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- Date Picker -->
-    <link href="static/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-    <!-- Daterange picker -->
-    <link href="static/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="static/plugins/iCheck/minimal/blue.css" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="static/plugins/html5shiv/html5shiv.min.js"></script>
-    <script src="static/plugins/respond/respond.min.js"></script>
-    <![endif]-->
+    <style>
+        .button-row button{margin:0px 5px;}
+    </style>
 </head>
 <body class="skin-blue sidebar-mini">
 <div class="wrapper">
@@ -45,12 +35,8 @@
         <section class="content-header">
             <h1>
                 送测单
-                <small>项目A</small>
+                <small><?php echo $prj_info['prj_name'] ?></small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> 项目A</a></li>
-                <li class="active">详情</li>
-            </ol>
         </section>
 
         <!-- Main content -->
@@ -59,25 +45,26 @@
                 <div class="col-xs-12">
                     <div class="box box-primary">
                     <!-- form start -->
-                    <form role="form">
+                    <form id="frm_prj" role="form">
+                        <input type="hidden" name="prj_id" value="<?php echo $prj_id?>">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="name">功能名</label>
-                                <input type="text" placeholder="填写功能名" id="name" class="form-control" disabled>
+                                <input type="text" placeholder="填写功能名" id="name" value="<?php echo h($feature_info['feature_name']) ?>" class="form-control" disabled>
                             </div>
                             <div class="form-group">
                                 <label>状态</label>
-                                <input type="text" placeholder="填写功能名" id="name" class="form-control" value="新建" disabled>
+                                <input type="text" placeholder="填写功能名" id="name" class="form-control" value="<?php echo h($status_dict[$feature_info['status']])?>" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="desc">描述</label>
-                                <textarea id="desc" placeholder="填写 ..." rows="3" class="form-control"></textarea>
+                                <textarea id="desc" placeholder="填写 ..." rows="3" name="desc" class="form-control"><?php echo h($feature_info['desc'])?></textarea>
                             </div>
                             <div class="form-group">
                                 <label>文件列表</label>
                                 <div class="btn-group pull-right">
                                     <button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#addDialog">添加</button>
-                                    <button type="button" class="btn btn-default btn-xs">删除</button>
+                                    <button type="button" class="btn btn-default btn-xs btn-del">删除</button>
                                 </div>
                                 <table class="table table-condensed">
                                     <tbody><tr>
@@ -86,31 +73,38 @@
                                         <th>版本号</th>
                                         <th>作者</th>
                                     </tr>
-                                    <tr>
-                                        <td><label><input type="checkbox"/></label></td>
-                                        <td>Update software</td>
-                                        <td><span class="label label-success">2014</span></td>
-                                        <td>zhangy</td>
-                                    </tr>
-                                    <tr>
-                                        <td><label><input type="checkbox"/></label></td>
-                                        <td>Clean database</td>
-                                        <td><span class="label label-danger">冲突</span></td>
-                                        <td>--</td>
-                                    </tr>
                                     </tbody></table>
                             </div>
 
                             <div class="form-group">
                                 <label>操作</label>
-                                <div>
-                                    <button type="button" class="btn btn-default btn-md" disabled>新建</button>
-                                    <button type="button" class="btn btn-info btn-md">送测</button>
-                                    <button type="button" class="btn btn-danger btn-md">关闭</button>
-                                    <button type="button" class="btn btn-danger btn-md">打回</button>
-                                    <button type="button" class="btn btn-success btn-md">通过</button>
-                                    <button type="button" class="btn btn-primary btn-md">部署</button>
-                                    <button type="button" class="btn btn-danger btn-md">回滚</button>
+                                <div class="button-row">
+                                    <?php switch($feature_info['status']){
+                                        case FeatureModel::STATUS_NEW:
+                                            echo '<button type="button" class="btn btn-default btn-md">保存</button>';
+                                            echo '<button type="button" class="btn btn-info btn-md">送测</button>';
+                                            echo '<button type="button" class="btn btn-danger btn-md">关闭</button>';
+                                            break;
+                                        case FeatureModel::STATUS_TEST:
+                                            echo '<button type="button" class="btn btn-warning btn-md">打回</button>';
+                                            echo '<button type="button" class="btn btn-success btn-md">通过</button>';
+                                            echo '<button type="button" class="btn btn-danger btn-md">关闭</button>';
+                                            break;
+                                        case FeatureModel::STATUS_FAIL:
+                                            echo '<button type="button" class="btn btn-default btn-md">保存</button>';
+                                            echo '<button type="button" class="btn btn-info btn-md">送测</button>';
+                                            echo '<button type="button" class="btn btn-danger btn-md">关闭</button>';
+                                            break;
+                                        case FeatureModel::STATUS_PASS:
+                                            echo '<button type="button" class="btn btn-primary btn-md">部署</button>';
+                                            echo '<button type="button" class="btn btn-danger btn-md">关闭</button>';
+                                            break;
+                                        case FeatureModel::STATUS_CLOSE:
+                                            break;
+                                        case FeatureModel::STATUS_DONE:
+                                            echo '<button type="button" class="btn btn-danger btn-md">回滚</button>';
+                                            break;
+                                    }?>
                                 </div>
                             </div>
 
@@ -146,49 +140,23 @@
                             <h4 class="modal-title" id="addDialogLabel">添加文件</h4>
                         </div>
                         <div class="modal-body">
-                            <form method="get" action="#">
 
+                            <form id="frm_search" method="get" action="index.php?controller=feature&action=ajaxFiles&id=<?php echo $feature_info['feature_id']; ?>">
                                 <div class="form-group input-group input-group-sm">
-                                    <input type="text" placeholder="输入版本号..." class="form-control" name="ver">
+                                    <input type="text" placeholder="输入版本号..." class="form-control" name="rev">
                                     <span class="input-group-btn">
-                                      <button type="button" class="btn btn-info btn-flat" name="search"><i class="fa fa-search"></i></button>
+                                      <button type="submit" class="btn btn-info btn-flat" name="search"><i class="fa fa-search"></i></button>
                                     </span>
                                 </div>
+                            </form>
 
-                                <div class="form-group">
-                                    <table class="table table-condensed">
-                                        <tbody><tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>file</th>
-                                            <th>版本号</th>
-                                            <th>作者</th>
-                                        </tr>
-                                        <tr>
-                                            <td><label><input type="checkbox"></label></td>
-                                            <td>Update software</td>
-                                            <td><span class="label label-success">2014</span></td>
-                                            <td>zhangy</td>
-                                        </tr>
-                                        <tr>
-                                            <td><label><input type="checkbox"></label></td>
-                                            <td>Clean database</td>
-                                            <td><span class="label label-danger">冲突</span></td>
-                                            <td>--</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="form-group">
-                                    <div class="callout callout-danger">
-                                        <h4>文件冲突！</h4>
-                                        <p>/app/controller/filea.php已被zhangy在“登陆权限控制”功能中添加</p>
-                                    </div>
-                                </div>
+                            <form id="frm_files" method="get" action="#">
+
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default pull-left" type="button">Close</button>
-                            <button class="btn btn-primary" type="button">OK</button>
+                            <button class="btn btn-primary btn-ok" type="button">OK</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div>
@@ -202,36 +170,88 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-<!-- jQuery UI 1.11.2 -->
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
+<script src="static/plugins/jQueryForm/jquery.form.js"></script>
 <!-- Bootstrap 3.3.2 JS -->
 <script src="static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- Sparkline -->
-<script src="static/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-<!-- jvectormap -->
-<script src="static/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-<script src="static/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-<!-- jQuery Knob Chart -->
-<script src="static/plugins/knob/jquery.knob.js" type="text/javascript"></script>
-<!-- daterangepicker -->
-<script src="static/plugins/moment/moment.min.js" type="text/javascript"></script>
-<script src="static/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-<!-- datepicker -->
-<script src="static/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-<!-- Slimscroll -->
-<script src="static/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<!-- FastClick -->
-<script src='static/plugins/fastclick/fastclick.min.js'></script>
+<!-- iCheck 1.0.1 -->
+<script src="static/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="static/dist/js/app.min.js" type="text/javascript"></script>
 
-<!-- AdminLTE for demo purposes -->
-<script src="static/dist/js/demo.js" type="text/javascript"></script>
+
+<script>
+
+    $(document).ready(function(){
+
+        $("#addDialog").on("show.bs.modal", function(){
+            $("#frm_search").resetForm();
+            $("#frm_files").html("");
+        });
+
+        $("#addDialog .btn-ok").on('click', function(){
+            $(this).parents(".modal").modal('hide');
+
+            $("#frm_files :checkbox:checked").each(function(){
+                var tds = $(this).parents('tr').first().children('td');
+
+                var find = null;
+                $('#frm_prj table:eq(0) tr:gt(0)').each(function(){
+                    var tds2 = $(this).children('td');
+
+                    if( tds.eq(1).html().trim() == tds2.eq(1).html().trim() ){
+                        find = tds2;
+                    }
+                });
+
+                if(find){
+                    console.log(find);
+                    find.eq(2).html(tds.eq(3).html());
+                    find.eq(3).html(tds.eq(4).html());
+                }else{
+                    var file = tds.eq(1).html().trim();
+                    var rev = tds.eq(3).html().trim();
+                    var author = tds.eq(4).html().trim();
+                    $('#frm_prj table:eq(0) tbody').append('<tr><td><label><input type="checkbox"/></label></td><td>'
+                    +file+'</td><td>'+rev+'</td><td>'+author+'</td></tr>');
+                }
+            });
+        });
+
+        $("#frm_prj .btn-del").on('click', function(){
+            $('#frm_prj table:eq(0) :checkbox:checked').each(function(){
+                $(this).parents('tr').first().remove();
+            })
+        });
+
+        $("body").delegate('tr', 'click', null, function(){
+            var checkbox = $(this).find(":checkbox:eq(0)");
+            //console.log(checkbox.attr('checked'));
+            checkbox.selected(!checkbox.is(":checked"));
+        });
+
+        $("#frm_search").on('submit', function(){
+            $(this).ajaxSubmit({
+                dataType:"html",
+                beforeSubmit: function(){
+
+                },
+                success: function(data) {
+                    $("#frm_files").html(data);
+                },
+                error: function (error) {
+
+                }
+            });
+            return false;
+        });
+
+        $("#frm_files").on('submit', function(){
+
+            return false;
+        });
+    });
+</script>
 </body>
 </html>

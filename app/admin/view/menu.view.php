@@ -22,8 +22,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="active"><a href="index.php?controller=feature&action=new&prjid=<?php echo $each['prj_id']?>"><i class="fa fa-circle-o"></i> 送测</a></li>
-                    <li><a href="index.php?controller=feature&action=work&prjid=<?php echo $each['prj_id']?>"><i class="fa fa-circle-o"></i> 测试中</a></li>
-                    <li><a href="index.php?controller=feature&action=history&prjid=<?php echo $each['prj_id']?>"><i class="fa fa-circle-o"></i> 已部署</a></li>
+                    <li><a href="index.php?controller=feature&action=work&prjid=<?php echo $each['prj_id']?>"><i class="fa fa-circle-o"></i> 处理中</a></li>
+                    <li><a href="index.php?controller=feature&action=history&prjid=<?php echo $each['prj_id']?>"><i class="fa fa-circle-o"></i> 已完成</a></li>
                     <li><a href="index.php?controller=feature&action=timeline&prjid=<?php echo $each['prj_id']?>"><i class="fa fa-circle-o"></i> 时间轴</a></li>
                 </ul>
             </li>

@@ -14,7 +14,7 @@ class UserController extends BaseController{
         $page = max(1, intval($this->_get('page')));
 
         $mod_user = UserModel::getInstance();
-        $users = $mod_user->listProjects($word, $page, 20);
+        $users = $mod_user->listUsers($word, $page, 20);
         $page_tool = $this->pageTool($users['page']['no'], $users['page']['count']);
         $this->show('user_list', array('users'=>$users, 'page_tool'=>$page_tool));
     }

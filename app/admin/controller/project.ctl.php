@@ -61,7 +61,7 @@ class ProjectController extends BaseController{
             }
 
             if($ret){
-                $this->showJsonResult(1, "成功" , array('user_id'=>$ret));
+                $this->showJsonResult(1, "成功" , array('project_id'=>$ret));
             }else{
                 $this->showJsonResult(-1, "失败", array());
             }

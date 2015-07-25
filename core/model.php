@@ -10,6 +10,9 @@ abstract class Model
 {
 
     //单例模式
+    /**
+     * @return Model
+     */
     public static function getInstance() {
         static $_instance = NULL;
         if (is_null($_instance)) {
