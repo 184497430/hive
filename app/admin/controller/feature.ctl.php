@@ -61,6 +61,10 @@ class FeatureController extends BaseController{
         }
     }
 
+    public function dosaveAction(){
+
+    }
+
     public function ajaxFilesAction(){
         $rev = $this->_get('rev');
         $feature_id = $this->_get('id');
@@ -83,12 +87,26 @@ class FeatureController extends BaseController{
     }
 
     public function ajaxGuessAction(){
-
         $rev = $this->_get('rev');
-        $svn = CSvn::getInstance('svn://192.168.56.101', 'admin', 'admin');
-        $logs = $svn->guess_log($rev);
+        $feature_id = $this->_get('id');
 
-        print_r($logs);
+        $feature_info = FeatureModel::getInstance()->getByPk($feature_id);
+
+        if($feature_info){
+            $prj_info = ProjectModel::getInstance()->getByPk($feature_info['prj_id']);
+        }
+
+        $result = array();
+        if(isset($prj_info)){
+            $svn = CSvn::getInstance($prj_info['svn_url'], $prj_info['svn_username'], $prj_info['svn_pwd']);
+            $logs = $svn->guess_log($rev);
+            foreach($logs as $each){
+                $label = $each['rev'] . str_repeat(" ", 8 - strlen($each['rev']) ) . $each['msg'];
+                $result[] = array("label"=>$label, "value"=>$each['rev']);
+            }
+        }
+
+        $this->showJsonResult(1, '', $result);
     }
 
     public function workAction(){

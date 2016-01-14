@@ -6,6 +6,7 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="static/plugins/JQueryUI/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
     <!-- FontAwesome 4.3.0 -->
     <link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
@@ -143,7 +144,7 @@
 
                             <form id="frm_search" method="get" action="index.php?controller=feature&action=ajaxFiles&id=<?php echo $feature_info['feature_id']; ?>">
                                 <div class="form-group input-group input-group-sm">
-                                    <input type="text" placeholder="输入版本号..." class="form-control" name="rev">
+                                    <input type="text" placeholder="输入版本号..." class="form-control" name="rev" id="rev">
                                     <span class="input-group-btn">
                                       <button type="submit" class="btn btn-info btn-flat" name="search"><i class="fa fa-search"></i></button>
                                     </span>
@@ -170,6 +171,7 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="static/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="static/plugins/jQueryUI/jquery-ui-1.10.3.custom.min.js"></script>
 <script src="static/plugins/jQueryForm/jquery.form.js"></script>
 <!-- Bootstrap 3.3.2 JS -->
 <script src="static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -245,6 +247,26 @@
                 }
             });
             return false;
+        });
+
+        var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
+
+        $("#rev").autocomplete({
+            source:function(request, response){
+                var matchCount = this.options.items;//返回结果集最大数量
+                $.get("index.php?controller=feature&action=ajaxGuess",{"rev":request.term, "id":1, "matchCount":matchCount},function(respData){
+                    return response(respData.data);
+                }, 'json');
+            }
+
+            /*
+            formatItem:function(item){
+                return item["regionName"]+"("+item["regionNameEn"]+"，"+item["regionShortnameEn"]+") - "+item["regionCode"];
+            },
+            setValue:function(item){
+                return {'data-value':item["regionName"],'real-value':item["regionCode"]};
+            }
+            */
         });
 
         $("#frm_files").on('submit', function(){

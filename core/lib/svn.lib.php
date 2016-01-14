@@ -105,7 +105,8 @@ class CSvn
 
         if($revision > $head_revision) return array();
 
-        $result[$revision] = @svn_log($this->repos, $revision, $revision);
+        $log = @svn_log($this->repos, $revision, $revision);
+        $result[$revision] = $log[0];
         for($i=9; $i>=0;$i--){
             $rev = intval(substr(strval($head_revision), 0, strlen($head_revision) - strlen($revision)-1) . strval($i) . strval($revision));
             if($rev > $head_revision) continue;
